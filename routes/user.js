@@ -32,7 +32,7 @@ route.post('/login', async (req, res) =>{
             
             const token = jwt.sign({
                 userId: user._id,
-            }, process.env.JWT_KEY)
+            }, '123')
             res.cookie('chatifyToken', token)
             res.status(200).json({
                 userId: user._id,

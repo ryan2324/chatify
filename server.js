@@ -27,7 +27,7 @@ io.on('connection', (socket) =>{
         socket.join(data)
     })
 })
-const uri = `mongodb+srv://chatify:${process.env.DATABASE_PASSWORD}@cluster0.tdab9.mongodb.net/usersDatabase?retryWrites=true&w=majority`
+const uri = `mongodb+srv://chatify:ryanjay2399@cluster0.tdab9.mongodb.net/usersDatabase?retryWrites=true&w=majority`
 mongoose.connect(uri, {
     useUnifiedTopology: true,
     useNewUrlParser: true
