@@ -82,7 +82,7 @@ searchInput.on('keyup', async (e) =>{
    })
    $('.results-item').on('click', (e) =>{
         currentChat.room = e.target.id;
-        currentChat.fullName = $(`.${$(e.target).attr('class')} p:last`).text();
+        currentChat.fullName = $(`#${e.target.id}} p:last`).text();
         resultItemHandler();
         
     })
@@ -97,7 +97,7 @@ const displayRecentMessages = async () =>{
     recents.map((data) =>{
         recentMessagesList.append(`
             <div id="${data.personId}" class="recent-message-item">
-                <div style="background-color: ${COLORS[data.personFullName[0]]};" id="${data.personId}" class="recent-item-img-container">
+                <div style="background-color: ${COLORS[data.personFullName[0]]};" class="recent-item-img-container">
                     <p style='text-transform: capitalize'>${data.personFullName[0]}</p>
                 </div>
                 <div class="recent-item-txt">
@@ -107,9 +107,11 @@ const displayRecentMessages = async () =>{
             </div>
         `)
     })
+    
     $('.recent-message-item').on('click', (e) =>{
         currentChat.room = e.target.id;
-        currentChat.fullName = $(`.${$(e.target).attr('class')} p:last`).prev().text();
+        currentChat.fullName = $(`#${e.target.id} .recent-item-txt p:first`).text();
+        console.log(currentChat)
         resultItemHandler();
     })
     
@@ -151,7 +153,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
     
 }
 
-const socket = io();
+const socket = io('http://localhost:3000/');
 socket.emit('initialRoom', chatify.userId);
 const sendMessage = async (message, from, to, sender) =>{
     chatsContainer.append(`
