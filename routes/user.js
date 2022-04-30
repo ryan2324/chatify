@@ -21,37 +21,29 @@ route.post('/signup', (req, res) =>{
 
 
 route.post('/login', async (req, res) =>{
-    try{
-        const user = await User.find({username: req.body.username});
-        res.json(user);
-    }catch(error){
-        res.json({message: 'error', error: error})
+    const user = await User.findOne({username: req.body.username});
+    if(!user){
+        return res.status(404).json({
+                message: 'Not Found'
+                })
     }
-    
-    // if(!user){
-    //     return res.status(404).json({
-    //             message: 'Not Found'
-    //             })
-    // }
-    // res.json(user);
-    // bcrypt.compare(req.body.password, user.password, (err, result) =>{
-    //     if(result){
+    bcrypt.compare(req.body.password, user.password, (err, result) =>{
+        if(result){
             
-    //         const token = jwt.sign({
-    //             userId: user._id,
-    //         }, '123')
-    //         res.cookie('chatifyToken', token)
-    //         res.status(200).json({
-    //             userId: user._id,
-    //             username: user.username,
-    //             token: token
-    //         })
+            const token = jwt.sign({
+                userId: user._id,
+            }, process.env.JWT_KEY)
+            res.cookie('chatifyToken', token)
+            res.status(200).json({
+                userId: user._id,
+                username: user.username,
+                token: token
+            })
             
-    //     }else{
-    //         console.log('user cannot found')
-    //     }
-    // })
-    
+        }else{
+            console.log('user cannot found')
+        }
+    })
 })
 route.post('/search', logger, async (req, res) =>{
     const query = new RegExp(`^${req.body.fullName}`)

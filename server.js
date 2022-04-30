@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const {Server} = require('socket.io')
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const server = app.listen(PORT, () =>{
     console.log(`lisntening on port`, PORT)
 })
@@ -27,7 +27,7 @@ io.on('connection', (socket) =>{
         socket.join(data)
     })
 })
-const uri = `mongodb+srv://chatify:ryanjay2399@cluster0.tdab9.mongodb.net/usersDatabase?retryWrites=true&w=majority`
+const uri = `mongodb+srv://chatify:${process.env.DATABASE_PASSWORD}@cluster0.tdab9.mongodb.net/usersDatabase?retryWrites=true&w=majority`
 mongoose.connect(uri, {
     useUnifiedTopology: true,
     useNewUrlParser: true
