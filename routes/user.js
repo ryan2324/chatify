@@ -21,9 +21,13 @@ route.post('/signup', (req, res) =>{
 
 
 route.post('/login', async (req, res) =>{
+    try{
+        const user = await User.findOne({username: req.body.username});
+        res.json(user);
+    }catch(error){
+        res.json({message: 'error', error: error})
+    }
     
-    const user = await User.findOne({username: req.body.username});
-    res.json(user);
     // if(!user){
     //     return res.status(404).json({
     //             message: 'Not Found'
