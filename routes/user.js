@@ -22,7 +22,7 @@ route.post('/signup', (req, res) =>{
 
 route.post('/login', async (req, res) =>{
     try{
-        const user = await User.findOne({username: req.body.username});
+        const user = await User.find({username: req.body.username});
         res.json(user);
     }catch(error){
         res.json({message: 'error', error: error})
