@@ -14,19 +14,7 @@ const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () =>{
     console.log(`lisntening on port`, PORT)
 })
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", CLIENT_ORIGIN);
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
-    res.header("Access-Control-Allow-Credentials", true);
-    if (req.method === "OPTIONS") {
-      return res.sendStatus(204);
-    }
-    next();
-  });
+
 
 const io = new Server(server);
 io.on('connection', (socket) =>{
