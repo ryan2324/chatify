@@ -144,7 +144,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
                 </div>
                 <div class="recent-item-txt">
                     <p style='text-transform: capitalize'>${personFullName}</p>
-                    <p style='color: #ccc'>${lastMessage}</p>
+                    <p class=${opened ? 'chat-opened' : 'chat-unopened'}>${lastMessage}</p>
                 </div>
             </div>
         `)
