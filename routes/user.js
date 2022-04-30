@@ -21,6 +21,7 @@ route.post('/signup', (req, res) =>{
 
 
 route.post('/login', async (req, res) =>{
+    res.json({message: 'hello'})
     const user = await User.findOne({username: req.body.username});
     if(!user){
         return res.status(404).json({
@@ -44,7 +45,7 @@ route.post('/login', async (req, res) =>{
             console.log('user cannot found')
         }
     })
-    res.json({message: 'hello'})
+    
 })
 route.post('/search', logger, async (req, res) =>{
     const query = new RegExp(`^${req.body.fullName}`)
