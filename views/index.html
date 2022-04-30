@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatify</title>
+    <link rel="shortcut icon" href="../public/assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../public/main.css">
+    <script src="https://kit.fontawesome.com/a4e4f824b7.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <main>
+        <nav class="sidebar">
+            <ul>
+                <button class="burger"><i class="fa-solid fa-bars"></i></button>
+                <li><img src="../public/assets/logo.png"></li>
+                <li><i class="fa-solid fa-messages"></i></li>
+                <li><i class="fa-solid fa-address-book"></i></li>
+                <li><i class="fa-solid fa-circle-info"></i></li>
+                <li><button id="logout"><i class="fa-solid fa-right-from-bracket"></i></button></li>
+            </ul>
+        </nav>
+        <div class="recent-messages">
+            <form class="recent-msg-form">
+                <input class="searchInput" type="text" placeholder="search people">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="search-results-container">
+                    
+                </div>
+            </form>
+            <div class="recent-messages-list">
+                
+            </div>
+        </div>
+        <div class="conversation">
+            <div class="chats">
+                <div class="notice">
+                    <i class="fa-solid fa-comments"></i>
+                    <p>Please select a conversation to send a message.</p>
+                </div>
+            </div>
+            <form class="chatForm">
+                <input class="chatInput" type="text" placeholder="Type a message">
+                <button id="sendBtn">send</button>
+            </form>
+        </div>
+        <div class="receiver-profile">
+            
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <script src="../public/scripts/jquery.js"></script>
+    <script src="../public/scripts/script.js"></script>
+</body>
+</html>

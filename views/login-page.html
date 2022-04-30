@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="shortcut icon" href="../public/assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../public/login-page.css">
+</head>
+<body>
+    <div class="main-container">
+        <form >
+            <p>Chatify</p>
+            <label for="input-username"></label>
+            <input id="input-username" type="text" placeholder="username">
+            <label for="input-password"></label>
+            <input id="input-password" type="password" placeholder="password">
+            <div class="buttons">
+                <button id="loginBtn">Login</button>
+                <button id="demologinBtn">Demo Login</button>
+            </div>
+            <a id="signupLink" href="/signup">Don't have an account? Click to signup.</a>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../public/scripts/jquery.js"></script>
+    <script src="../public/scripts/login-script.js"></script>
+</body>
+</html>
