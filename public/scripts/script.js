@@ -134,7 +134,6 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
         userId,
         personId,
         personFullName,
-        opened,
         lastMessage,
     })
     recentMessagesList.append(`
@@ -144,14 +143,14 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
                 </div>
                 <div class="recent-item-txt">
                     <p style='text-transform: capitalize'>${personFullName}</p>
-                    <p class=${opened ? 'chat-opened' : 'chat-unopened'}>${lastMessage}</p>
+                    <p style='color: #ccc'>${lastMessage}</p>
                 </div>
             </div>
         `)
     
 }
 
-const socket = io();
+const socket = io('http://localhost:3000/');
 socket.emit('initialRoom', chatify.userId);
 const sendMessage = async (message, from, to, sender) =>{
     chatsContainer.append(`
@@ -177,7 +176,7 @@ sendBtn.on('click', (e) =>{
         socket.emit('send', {
             userId: chatify.userId,
             room: currentChat.room,
-            fullName: chatify.fullName,
+            fullName: currentChat.fullName,
             message: chatInput.val(),
         })
         sendMessage(chatInput.val(), chatify.userId, currentChat.room, chatify.userId)
@@ -185,7 +184,7 @@ sendBtn.on('click', (e) =>{
     }
 })
 socket.on('receive', async (data) =>{
-    if(data.userId === currentChat.room){
+    if(data.room === currentChat.room){
         chatsContainer.append(`
             <span class="message-receive"}>${data.message}</span>
         `)

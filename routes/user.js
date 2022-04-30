@@ -37,6 +37,7 @@ route.post('/login', async (req, res) =>{
             res.status(200).json({
                 userId: user._id,
                 username: user.username,
+                fullName: user.fullName,
                 token: token
             })
             
