@@ -144,7 +144,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
                 </div>
                 <div class="recent-item-txt">
                     <p style='text-transform: capitalize'>${personFullName}</p>
-                    <p class=${data.opened ? 'chat-opened' : 'chat-unopened'}>${lastMessage}</p>
+                    <p class=${opened ? 'chat-opened' : 'chat-unopened'}>${lastMessage}</p>
                 </div>
             </div>
         `)
@@ -177,7 +177,7 @@ sendBtn.on('click', (e) =>{
         socket.emit('send', {
             userId: chatify.userId,
             room: currentChat.room,
-            fullName: currentChat.fullName,
+            fullName: chatify.fullName,
             message: chatInput.val(),
         })
         sendMessage(chatInput.val(), chatify.userId, currentChat.room, chatify.userId)
