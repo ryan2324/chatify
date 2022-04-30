@@ -23,12 +23,13 @@ route.post('/signup', (req, res) =>{
 route.post('/login', async (req, res) =>{
     
     const user = await User.findOne({username: req.body.username});
-    if(!user){
-        return res.status(404).json({
-                message: 'Not Found'
-                })
-    }
     res.json(user);
+    // if(!user){
+    //     return res.status(404).json({
+    //             message: 'Not Found'
+    //             })
+    // }
+    // res.json(user);
     // bcrypt.compare(req.body.password, user.password, (err, result) =>{
     //     if(result){
             
