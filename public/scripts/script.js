@@ -176,7 +176,7 @@ sendBtn.on('click', (e) =>{
     if(currentChat.room && currentChat.fullName){
         socket.emit('send', {
             userId: chatify.userId,
-            room: chatify.userId,
+            room: currentChat.room,
             fullName: chatify.fullName,
             message: chatInput.val(),
         })
@@ -185,7 +185,7 @@ sendBtn.on('click', (e) =>{
     }
 })
 socket.on('receive', async (data) =>{
-    if(data.room === currentChat.room){
+    if(data.userId === currentChat.room){
         chatsContainer.append(`
             <span class="message-receive"}>${data.message}</span>
         `)
