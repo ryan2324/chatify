@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const {Server} = require('socket.io')
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 const server = app.listen(PORT, () =>{
     console.log(`lisntening on port`, PORT)
 })
