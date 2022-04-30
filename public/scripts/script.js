@@ -144,7 +144,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
                 </div>
                 <div class="recent-item-txt">
                     <p style='text-transform: capitalize'>${personFullName}</p>
-                    <p style='color: #ccc'>${lastMessage}</p>
+                    <p class=${data.opened ? 'chat-opened' : 'chat-unopened'}>${lastMessage}</p>
                 </div>
             </div>
         `)
@@ -185,7 +185,7 @@ sendBtn.on('click', (e) =>{
     }
 })
 socket.on('receive', async (data) =>{
-    if(data.room === currentChat.room){
+    if(data.userId === currentChat.room){
         chatsContainer.append(`
             <span class="message-receive"}>${data.message}</span>
         `)
