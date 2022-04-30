@@ -139,7 +139,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
     })
     recentMessagesList.append(`
             <div id="${personId}" class="recent-message-item">
-                <div style="background-color: ${COLORS[data.personFullName[0]]};" class="recent-item-img-container">
+                <div style="background-color: ${COLORS[personFullName[0]]};" class="recent-item-img-container">
                     <p style='text-transform: capitalize'>${personFullName[0]}</p>
                 </div>
                 <div class="recent-item-txt">
