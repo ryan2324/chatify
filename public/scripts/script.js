@@ -176,7 +176,7 @@ sendBtn.on('click', (e) =>{
     if(currentChat.room && currentChat.fullName){
         socket.emit('send', {
             userId: chatify.userId,
-            room: currentChat.room,
+            room: chatify.userId,
             fullName: chatify.fullName,
             message: chatInput.val(),
         })
