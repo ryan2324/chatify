@@ -134,6 +134,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
         userId,
         personId,
         personFullName,
+        opened,
         lastMessage,
     })
     recentMessagesList.append(`
@@ -150,7 +151,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
     
 }
 
-const socket = io();
+const socket = io('http://localhost:3000/');
 socket.emit('initialRoom', chatify.userId);
 const sendMessage = async (message, from, to, sender) =>{
     chatsContainer.append(`
