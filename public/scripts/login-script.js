@@ -9,10 +9,11 @@ const login = async () =>{
             username: inputUsername.val(),
             password: inputPassword.val()
         })
-        if(response.status == 200){
-            localStorage.setItem('chatify', JSON.stringify(response.data))
-            window.location.href = '/'
-        }
+        console.log(response)
+        // if(response.status == 200){
+        //     localStorage.setItem('chatify', JSON.stringify(response.data))
+        //     window.location.href = '/'
+        // }
         
     }catch(error){
         console.log(error)

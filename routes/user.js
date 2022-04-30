@@ -21,30 +21,31 @@ route.post('/signup', (req, res) =>{
 
 
 route.post('/login', async (req, res) =>{
-    res.json({message: 'hello'})
+    
     const user = await User.findOne({username: req.body.username});
     if(!user){
         return res.status(404).json({
                 message: 'Not Found'
                 })
     }
-    bcrypt.compare(req.body.password, user.password, (err, result) =>{
-        if(result){
+    res.json(user);
+    // bcrypt.compare(req.body.password, user.password, (err, result) =>{
+    //     if(result){
             
-            const token = jwt.sign({
-                userId: user._id,
-            }, '123')
-            res.cookie('chatifyToken', token)
-            res.status(200).json({
-                userId: user._id,
-                username: user.username,
-                token: token
-            })
+    //         const token = jwt.sign({
+    //             userId: user._id,
+    //         }, '123')
+    //         res.cookie('chatifyToken', token)
+    //         res.status(200).json({
+    //             userId: user._id,
+    //             username: user.username,
+    //             token: token
+    //         })
             
-        }else{
-            console.log('user cannot found')
-        }
-    })
+    //     }else{
+    //         console.log('user cannot found')
+    //     }
+    // })
     
 })
 route.post('/search', logger, async (req, res) =>{
