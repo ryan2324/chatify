@@ -89,11 +89,11 @@ searchInput.on('keyup', async (e) =>{
    
 })
 const displayRecentMessages = async () =>{
-    recentMessagesList.html('')
     const response = await axios.post('recent-message', {
         userId: chatify.userId,
     })
     const recents = response.data;
+    recentMessagesList.html('')
     recents.map((data) =>{
         recentMessagesList.append(`
             <div id="${data.personId}" class="recent-message-item">
@@ -118,8 +118,11 @@ const displayRecentMessages = async () =>{
     return await recents;
 }
 const addToRecentMessages = async (userId, personId, personFullName, opened, lastMessage) =>{
-    const recentMessages = await displayRecentMessages();
-    const existing = recentMessages.find((person) =>{
+    const responseMessages = await axios.post('recent-message', {
+        userId: chatify.userId,
+    })
+    const recents = responseMessages.data;
+    const existing = recents.find((person) =>{
         return person.personId === personId
     })
     if(existing !== undefined){
