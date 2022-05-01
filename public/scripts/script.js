@@ -34,8 +34,8 @@ const currentChat = {};
 const resultItemHandler = async () =>{
     const response = await axios.post('/message/getmessages',{
         userId: chatify.userId,
-        from: chatify.userId,
-        to: currentChat.room
+        sender: chatify.userId,
+        receiver: currentChat.room
     },{
         headers: {
             authorization: 'Bearer ' + chatify.token
@@ -44,7 +44,7 @@ const resultItemHandler = async () =>{
     chatsContainer.html("")
     response.data.map((chat) =>{
         chatsContainer.append(`
-            <span class=${chat.recipients[0] === chatify.userId ? "message-sent": "message-receive" }>${chat.message}</span>
+            <span class=${chat.sender === chatify.userId ? "message-sent": "message-receive" }>${chat.message}</span>
         `)
     })
     chatsContainer.animate({scrollTop: chatsContainer[0].scrollHeight})
@@ -111,7 +111,6 @@ const displayRecentMessages = async () =>{
     $('.recent-message-item').on('click', (e) =>{
         currentChat.room = e.target.id;
         currentChat.fullName = $(`#${e.target.id} .recent-item-txt p:first`).text();
-        console.log(currentChat)
         resultItemHandler();
     })
     
@@ -156,7 +155,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
     
 }
 
-const socket = io();
+const socket = io('http://localhost:3000/');
 socket.emit('initialRoom', chatify.userId);
 const sendMessage = async (message, from, to, sender) =>{
     chatsContainer.append(`
@@ -166,8 +165,8 @@ const sendMessage = async (message, from, to, sender) =>{
     const response = await axios.post('message/addmessage',{
         userId: chatify.userId,
         message,
-        from,
-        to,
+        sender: from,
+        receiver: to,
         sender,
     },{
         headers: {
@@ -200,4 +199,4 @@ socket.on('receive', async (data) =>{
     addToRecentMessages(chatify.userId, data.userId, data.fullName, false, data.message)
 })
 
-displayRecentMessages()
+displayRecentMessages();

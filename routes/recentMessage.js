@@ -13,23 +13,36 @@ route.post('/recent-message', async (req, res) =>{
 })
 
 route.post('/add-recent-message', async (req, res) =>{
-    const recent = await RecentMessage.insertMany({
+    const recent = await RecentMessage.insertMany([{
         userId: req.body.userId,
         personId: req.body.personId,
         personFullName: req.body.personFullName,
         lastMessage: req.body.lastMessage,
         opened: req.body.opened,
         timestamp: JSON.stringify(Date.now())
-    })
+    },{
+        userId: req.body.personId,
+        personId: req.body.userId,
+        personFullName: req.body.personFullName,
+        lastMessage: req.body.lastMessage,
+        opened: false,
+        timestamp: JSON.stringify(Date.now())
+    }])
+
     res.status(200).json({message: 'recent message added'})
 })
 
 route.patch('/update-last-message', async (req, res) =>{
-    const recent = await RecentMessage.updateMany({
+    const sender = await RecentMessage.updateMany({
         userId: req.body.userId, 
         personId: req.body.personId }, 
         {$set:{lastMessage: req.body.lastMessage, opened: req.body.opened, timestamp: JSON.stringify(Date.now())}})
-    console.log(req.body)
+
+    const receiver = await RecentMessage.updateMany({
+        userId: req.body.personId, 
+        personId:  req.body.userId}, 
+        {$set:{lastMessage: req.body.lastMessage, opened: false, timestamp: JSON.stringify(Date.now())}})
+        
     res.status(200).json({message: 'update success'})
 })
 
