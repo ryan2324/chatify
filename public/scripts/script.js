@@ -118,10 +118,10 @@ const displayRecentMessages = async () =>{
     return await recents;
 }
 const addToRecentMessages = async (userId, personId, personFullName, opened, lastMessage) =>{
-    const responseMessages = await axios.post('recent-message', {
+    const recentMessages = await axios.post('recent-message', {
         userId: chatify.userId,
     })
-    const recents = responseMessages.data;
+    const recents = recentMessages.data;
     const existing = recents.find((person) =>{
         return person.personId === personId
     })
