@@ -8,7 +8,6 @@ route.post('/recent-message', async (req, res) =>{
     const sorted = response.sort((a, b) =>{
         return b.timestamp - a.timestamp 
     })
-    
     res.status(200).json(sorted)
 })
 
@@ -41,8 +40,7 @@ route.patch('/update-last-message', async (req, res) =>{
     const receiver = await RecentMessage.updateMany({
         userId: req.body.personId, 
         personId:  req.body.userId}, 
-        {$set:{lastMessage: req.body.lastMessage, opened: false, timestamp: JSON.stringify(Date.now())}})
-        
+        {$set:{lastMessage: req.body.lastMessage, opened: !req.body.opened, timestamp: JSON.stringify(Date.now())}})
     res.status(200).json({message: 'update success'})
 })
 

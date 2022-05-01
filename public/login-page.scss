@@ -37,12 +37,22 @@
                 border-bottom: 2px solid $primary-color;
             }
         }
+        .invalid-input{
+            border-bottom: 1px solid red;
+        }
+        .error-txt{
+            font-size: 14px;
+            display: block;
+            height: 14px;
+            color: red;
+        }
         .buttons{
             display: flex;
             justify-content: center;
             column-gap: 10px;
         }
         button{
+            cursor: pointer;
             padding: 6px 12px;
             border: transparent;
             font-weight: 500;

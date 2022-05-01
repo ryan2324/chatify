@@ -107,14 +107,11 @@ const displayRecentMessages = async () =>{
             </div>
         `)
     })
-    
     $('.recent-message-item').on('click', (e) =>{
         currentChat.room = e.target.id;
         currentChat.fullName = $(`#${e.target.id} .recent-item-txt p:first`).text();
         resultItemHandler();
     })
-    
-    return await recents;
 }
 const addToRecentMessages = async (userId, personId, personFullName, opened, lastMessage) =>{
     const recentMessages = await axios.post('recent-message', {
@@ -124,6 +121,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
     const existing = recents.find((person) =>{
         return person.personId === personId
     })
+    
     if(existing !== undefined){
         const response = await axios.patch('/update-last-message',{
             userId,
@@ -155,7 +153,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
     
 }
 
-const socket = io();
+const socket = io('http://localhost:3000/');
 socket.emit('initialRoom', chatify.userId);
 const sendMessage = async (message, from, to, sender) =>{
     chatsContainer.append(`
@@ -196,7 +194,18 @@ socket.on('receive', async (data) =>{
     }
     
     chatsContainer.animate({scrollTop: chatsContainer[0].scrollHeight})
-    addToRecentMessages(chatify.userId, data.userId, data.fullName, false, data.message)
+    recentMessagesList.children(`#${data.userId}`).remove();
+    recentMessagesList.prepend(`
+        <div id="${data.userId}" class="recent-message-item">
+            <div style="background-color: ${COLORS[data.fullName[0]]};" class="recent-item-img-container">
+                <p style='text-transform: capitalize'>${data.fullName[0]}</p>
+            </div>
+            <div class="recent-item-txt">
+                <p style='text-transform: capitalize'>${data.fullName}</p>
+                <p class=${'chat-unopened'}>${data.message}</p>
+            </div>
+        </div>
+    `)
 })
 
 displayRecentMessages();

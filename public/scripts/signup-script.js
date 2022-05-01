@@ -27,23 +27,30 @@ signupBtn.on('click', async (e) =>{
 
     if(inputFullName.val().trim().length < 3){
         // full name must be 3 characters length
+        inputFullName.prev().text('full name must be 3 characters length')
+        inputFullName.addClass('invalid-input');
         fullNameIsValid = false;
     }else{
         fullNameIsValid = true;
     }
     if(inputUsername.val().trim().length < 3){
         //password must be 8 characters length
+        inputUsername.prev().text('username must be 3 characters length')
+        inputUsername.addClass('invalid-input');
         usernameIsValid = false;
     }else{
         usernameIsValid = true;
     }
     if(inputPassword.val().trim().length < 8){
         //password must be 8 characters length
+        inputPassword.prev().text('password must be 8 characters length')
+        inputPassword.addClass('invalid-input');
         passwordIsValid = false;
     }else{
         passwordIsValid = true;
     }
     if(inputPassword.val() !== inputReTypePassword.val()){
+        inputReTypePassword.prev().text('password does not match')
         inputReTypePassword.addClass('invalid-input');
         //password does not match 
         passwordIsMatched = false;

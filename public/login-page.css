@@ -65,6 +65,17 @@ body, html, * {
   border-bottom: 2px solid #007C80;
 }
 
+.main-container form .invalid-input {
+  border-bottom: 1px solid red;
+}
+
+.main-container form .error-txt {
+  font-size: 14px;
+  display: block;
+  height: 14px;
+  color: red;
+}
+
 .main-container form .buttons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -77,6 +88,7 @@ body, html, * {
 }
 
 .main-container form button {
+  cursor: pointer;
   padding: 6px 12px;
   border: transparent;
   font-weight: 500;

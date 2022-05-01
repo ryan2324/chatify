@@ -22,14 +22,13 @@ route.post('/signup', (req, res) =>{
 
 route.post('/login', async (req, res) =>{
     const user = await User.findOne({username: req.body.username});
-    if(!user){
-        return res.status(404).json({
-                message: 'Not Found'
-                })
+    console.log(user)
+    if(user === null || user === undefined){
+        return res.status(401).json({message: "Unauthorized"})
     }
+    
     bcrypt.compare(req.body.password, user.password, (err, result) =>{
         if(result){
-            
             const token = jwt.sign({
                 userId: user._id,
             }, process.env.JWT_KEY)
@@ -42,7 +41,8 @@ route.post('/login', async (req, res) =>{
             })
             
         }else{
-            console.log('user cannot found')
+            res.status(401).json({message: "Unauthorized"})
+            
         }
     })
 })
