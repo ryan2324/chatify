@@ -6,7 +6,7 @@ route.post('/recent-message', async (req, res) =>{
     })
 
     const sorted = response.sort((a, b) =>{
-        return a.timestamp - b.timestamp
+        return b.timestamp - a.timestamp 
     })
     
     res.status(200).json(sorted)
