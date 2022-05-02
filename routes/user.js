@@ -47,7 +47,7 @@ route.post('/login', async (req, res) =>{
     })
 })
 route.post('/search', logger, async (req, res) =>{
-    const query = new RegExp(`^${req.body.fullName}`)
+    const query = new RegExp(`^${req.body.fullName}`,'i')
     const result = await User.find({fullName: {$regex: query}})
     let people = [];
 
