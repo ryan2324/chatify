@@ -203,7 +203,7 @@ socket.on('receive', async (data) =>{
     recentMessagesList.children(`#${data.userId}`).remove();
     recentMessagesList.prepend(`
         <div id="${data.userId}" class="recent-message-item" style='position: relative'>
-            <span style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
+            <span class='recent-messages-selector' style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
             <div style="background-color: ${COLORS[data.fullName[0]]};" class="recent-item-img-container">
                 <p style='text-transform: capitalize'>${data.fullName[0]}</p>
             </div>
