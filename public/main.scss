@@ -315,6 +315,7 @@ main{
     @include flex-column();
     align-items: center;
     @include smallScreen(){
+        z-index: 2;
         flex-direction: row;
         align-items: center;
         position: absolute;
