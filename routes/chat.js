@@ -17,13 +17,13 @@ route.post('/addmessage', logger, async (req, res) =>{
 route.post('/getmessages', logger, async (req, res) =>{
     const sent = await Message.find({
         sender: req.body.sender,
-        receive: req.body.receiver
+        receiver: req.body.receiver
     })
-    const receive = await Message.find({
+    const receiver = await Message.find({
         sender: req.body.receiver,
-        receive: req.body.sender
+        receiver: req.body.sender
     })
-    const unsorted = [...sent, ...receive];
+    const unsorted = [...sent, ...receiver];
     const sorted = unsorted.sort((a, b) =>{
         return a.timestamp - b.timestamp
     })

@@ -115,7 +115,7 @@ const displayRecentMessages = async () =>{
     //     resultItemHandler();
     // })
 }
-const addToRecentMessages = async (userId, personId, personFullName, opened, lastMessage) =>{
+const addToRecentMessages = async (userId, personId, personFullName, senderFullName, opened, lastMessage) =>{
     const recentMessages = await axios.post('recent-message', {
         userId: chatify.userId,
     })
@@ -138,6 +138,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
         userId,
         personId,
         personFullName,
+        senderFullName,
         opened,
         lastMessage,
     })
@@ -173,7 +174,7 @@ const sendMessage = async (message, from, to, sender) =>{
             authorization: "Bearer " + chatify.token
         }
     })
-    addToRecentMessages(from, to, currentChat.fullName, true, message)
+    addToRecentMessages(from, to, currentChat.fullName, chatify.fullName, true, message)
 }
 sendBtn.on('click', (e) =>{
     e.preventDefault();

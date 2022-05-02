@@ -22,7 +22,7 @@ route.post('/add-recent-message', async (req, res) =>{
     },{
         userId: req.body.personId,
         personId: req.body.userId,
-        personFullName: req.body.personFullName,
+        personFullName: req.body.senderFullName,
         lastMessage: req.body.lastMessage,
         opened: false,
         timestamp: JSON.stringify(Date.now())
