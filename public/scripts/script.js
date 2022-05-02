@@ -72,17 +72,18 @@ searchInput.on('keyup', async (e) =>{
    searchResultsContainer.html('')
    const results = response.data.map((person) =>{
         searchResultsContainer.append(`
-            <div id=${person.room} class="results-item">
+            <div id=${person.room} class="results-item" style='position: relative'>
+                <span style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
                 <div style="background-color: ${COLORS[person.fullName[0]]};" class="img-container">
-                    <p style='text-transform: capitalize'>${person.fullName[0]}</p>
+                    <p  style='text-transform: capitalize'>${person.fullName[0]}</p>
                 </div>
-                <p style='text-transform: capitalize' class="result-name">${person.fullName}</p>
+                <p class='person-fullName' style='text-transform: capitalize' class="result-name">${person.fullName}</p>
             </div>
         `)
    })
    $('.results-item').on('click', (e) =>{
-        currentChat.room = e.target.id;
-        currentChat.fullName = $(`#${e.target.id}} p:last`).text();
+        currentChat.room = $(e.target).parent().attr('id');
+        currentChat.fullName = $(e.target).parent().children('.person-fullName').text();
         resultItemHandler();
         
     })
@@ -96,20 +97,21 @@ const displayRecentMessages = async () =>{
     recentMessagesList.html('')
     recents.map((data) =>{
         recentMessagesList.append(`
-            <div id="${data.personId}" class="recent-message-item">
+            <div id="${data.personId}" class="recent-message-item" style='position: relative'>
+                <span style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
                 <div style="background-color: ${COLORS[data.personFullName[0]]};" class="recent-item-img-container">
-                    <p style='text-transform: capitalize'>${data.personFullName[0]}</p>
+                    <p  style='text-transform: capitalize'>${data.personFullName[0]}</p>
                 </div>
                 <div class="recent-item-txt">
-                    <p style='text-transform: capitalize'>${data.personFullName}</p>
+                    <p class='person-fullName' style='text-transform: capitalize'>${data.personFullName}</p>
                     <p class=${data.opened ? 'chat-opened' : 'chat-unopened'}>${data.lastMessage}</p>
                 </div>
             </div>
         `)
     })
     $('.recent-message-item').on('click', (e) =>{
-        currentChat.room = e.target.id;
-        currentChat.fullName = $(`#${e.target.id} .recent-item-txt p:first`).text();
+        currentChat.room = $(e.target).parent().attr('id');
+        currentChat.fullName = $(e.target).parent().children('.recent-item-txt').children('.person-fullName').text();
         resultItemHandler();
     })
 }
@@ -140,17 +142,17 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
         lastMessage,
     })
     recentMessagesList.append(`
-            <div id="${personId}" class="recent-message-item">
+            <div id="${personId}" class="recent-message-item" style='position: relative'>
+                <span style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
                 <div style="background-color: ${COLORS[personFullName[0]]};" class="recent-item-img-container">
                     <p style='text-transform: capitalize'>${personFullName[0]}</p>
                 </div>
                 <div class="recent-item-txt">
-                    <p style='text-transform: capitalize'>${personFullName}</p>
+                    <p class='person-fullName' style='text-transform: capitalize'>${personFullName}</p>
                     <p class=${opened ? 'chat-opened' : 'chat-unopened'}>${lastMessage}</p>
                 </div>
             </div>
         `)
-    
 }
 
 const socket = io();
@@ -175,6 +177,9 @@ const sendMessage = async (message, from, to, sender) =>{
 }
 sendBtn.on('click', (e) =>{
     e.preventDefault();
+    if(chatInput.val().trim() === ""){
+        return
+    }
     if(currentChat.room && currentChat.fullName){
         socket.emit('send', {
             userId: chatify.userId,

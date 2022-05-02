@@ -101,6 +101,14 @@ main {
   }
 }
 
+@media screen and (max-width: 400px) {
+  .sidebar ul {
+    -webkit-column-gap: 20px;
+            column-gap: 20px;
+    padding: 0 20px;
+  }
+}
+
 @media screen and (min-width: 800px) {
   .sidebar ul .burger {
     display: none;
@@ -364,6 +372,12 @@ main {
   font-weight: 600;
 }
 
+@media screen and (max-width: 400px) {
+  .conversation .chats .notice p {
+    font-size: 16px;
+  }
+}
+
 .conversation .chats .notice i {
   font-size: 50px;
   color: #007C80;
@@ -379,14 +393,27 @@ main {
   padding: 20px 0;
 }
 
+@media screen and (max-width: 400px) {
+  .conversation .chatForm {
+    -webkit-column-gap: 5px;
+            column-gap: 5px;
+  }
+}
+
 .conversation .chatForm .chatInput {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  font-size: 18px;
   padding: 6px 12px;
   border-radius: 1rem;
   font-size: 24px;
+}
+
+@media screen and (max-width: 400px) {
+  .conversation .chatForm .chatInput {
+    font-size: 16px;
+    padding: 6px;
+  }
 }
 
 .conversation .chatForm button {
@@ -405,10 +432,24 @@ main {
           box-shadow: 0px 3px 9px -3px rgba(0, 0, 0, 0.75) inset;
 }
 
+@media screen and (max-width: 400px) {
+  .conversation .chatForm button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
 @media screen and (max-width: 850px) {
   .conversation {
     width: 80%;
     height: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .conversation {
+    padding-top: 20px;
+    width: 100%;
   }
 }
 
@@ -426,6 +467,24 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media screen and (max-width: 400px) {
+  .receiver-profile {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: absolute;
+    top: 8%;
+    left: 0;
+    width: 100vw !important;
+    background-color: #fff;
+    padding: 6px 12px;
+  }
 }
 
 .receiver-profile .profile-photo {
@@ -456,6 +515,14 @@ main {
   }
 }
 
+@media screen and (max-width: 400px) {
+  .receiver-profile .profile-photo {
+    width: 40px;
+    height: 40px;
+    margin-top: 0;
+  }
+}
+
 .receiver-profile .profile-photo p {
   color: #fff;
   font-size: 100px;
@@ -469,9 +536,21 @@ main {
   }
 }
 
+@media screen and (max-width: 400px) {
+  .receiver-profile .profile-photo p {
+    font-size: 30px;
+  }
+}
+
 .receiver-profile .profile-name {
   font-size: 24px;
   text-transform: capitalize;
+}
+
+@media screen and (max-width: 400px) {
+  .receiver-profile .profile-name {
+    font-size: 16px;
+  }
 }
 
 .receiver-profile .profile-username {

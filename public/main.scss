@@ -3,19 +3,23 @@
 @mixin flex-column (){
     display: flex;
     flex-direction: column;
-}
-@mixin mobile () {
+};
+@mixin mediumScreen () {
     @media screen and (max-width: 850px) {
         @content
     }
-}
-
+};
+@mixin smallScreen () {
+    @media screen and (max-width: 400px) {
+        @content;
+    }
+};
 
 main{
     display: flex;
     height: 100vh;
     overflow: hidden;
-    @include mobile(){
+    @include mediumScreen(){
         height: 100vh;
         position: relative;
         padding-top: 80px;
@@ -47,7 +51,7 @@ main{
                     width: 35px;
                 }
             }
-            @include mobile(){
+            @include mediumScreen(){
                 &:nth-child(2){
                     font-size: 20px;
                     margin-right: auto;
@@ -62,13 +66,17 @@ main{
                 font-size: 28px;
             }
         }
-        @include mobile(){
+        @include mediumScreen(){
             flex-direction: row;
             justify-content: flex-end;
             column-gap: 50px;
             padding: 0 50px;
             height: 100%;
             align-items: center;
+        }
+        @include smallScreen(){
+            column-gap: 20px;
+            padding: 0 20px;
         }
         @media screen and (min-width: 800px) {
             .burger{
@@ -82,7 +90,7 @@ main{
             background-color: transparent;
         }
     }
-    @include mobile(){
+    @include mediumScreen(){
         position: absolute;
         top: 0;
         width: 100vw;
@@ -155,7 +163,7 @@ main{
             }
         }
     }
-    @include mobile(){
+    @include mediumScreen(){
         width: 75%;
         position: absolute;
         background-color: #fff;
@@ -204,6 +212,7 @@ main{
     padding-top: 50px;
     font-size: 18px;
     height: 100%;
+    
     @include flex-column();
     .chats{
         z-index: 1; 
@@ -244,11 +253,15 @@ main{
                 font-size: 20px;
                 color: $primary-color;
                 font-weight: 600;
+                @include smallScreen(){
+                    font-size: 16px;
+                }
             }
             i{
                 font-size: 50px;
                 color: $primary-color;
             }
+            
         }
     }
     .chatForm{
@@ -256,12 +269,18 @@ main{
         display: flex;
         column-gap: 10px;
         padding: 20px 0;
+        @include smallScreen(){
+            column-gap: 5px;
+        }
         .chatInput{
             flex-grow: 1;
-            font-size: 18px;
             padding: 6px 12px;
             border-radius: 1rem;
             font-size: 24px;
+            @include smallScreen(){
+                font-size: 16px;
+                padding: 6px;
+            }
         }
         button{
             cursor: pointer;
@@ -275,11 +294,19 @@ main{
             &:active{
                 box-shadow: 0px 3px 9px -3px rgba(0,0,0,0.75) inset;
             }
+            @include smallScreen(){
+                font-size: 14px;
+                padding: 6px 12px;
+            }
         }
     }
-    @include mobile(){
+    @include mediumScreen(){
         width: 80%;
         height: 100%;
+    }
+    @include smallScreen(){
+        padding-top: 20px;
+        width: 100%;
     }
 }
 .receiver-profile{
@@ -287,6 +314,16 @@ main{
     width: 19%;
     @include flex-column();
     align-items: center;
+    @include smallScreen(){
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        top: 8%;
+        left: 0;
+        width: 100vw!important;
+        background-color: #fff;
+        padding: 6px 12px;
+    }
     .profile-photo{
         margin-top: 20%;
         width: 150px;
@@ -296,28 +333,39 @@ main{
         @include flex-column();
         justify-content: center;
         align-items: center;
-        @include mobile(){
+        @include mediumScreen(){
             width: 100px;
             height: 100px;
+        }
+        @include smallScreen(){
+            width: 40px;
+            height: 40px;
+            margin-top: 0;
         }
         p{
             color: #fff;
             font-size: 100px;
             font-weight: 700;
             text-transform: uppercase;
-            @include mobile(){
+            @include mediumScreen(){
                 font-size: 75px;
+            }
+            @include smallScreen(){
+                font-size: 30px;
             }
         }
     }
     .profile-name{
         font-size: 24px;
         text-transform: capitalize;
+        @include smallScreen(){
+            font-size: 16px;
+        }
     }
     .profile-username{
         color: rgb(110, 110, 110);
     }
-    @include mobile(){
+    @include mediumScreen(){
         width: 30%;
     }
 }
