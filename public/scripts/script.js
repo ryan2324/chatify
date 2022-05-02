@@ -212,6 +212,11 @@ socket.on('receive', async (data) =>{
             </div>
         </div>
     `)
+    $('.recent-message-item').on('click', (e) =>{
+        currentChat.room = $(e.target).parent().attr('id');
+        currentChat.fullName = $(e.target).parent().children('.recent-item-txt').children('.person-fullName').text();
+        resultItemHandler();
+    })
 })
 
 displayRecentMessages();
