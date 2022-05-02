@@ -73,7 +73,7 @@ searchInput.on('keyup', async (e) =>{
    const results = response.data.map((person) =>{
         searchResultsContainer.append(`
             <div id=${person.room} class="results-item" style='position: relative'>
-                <span style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
+                <span class='search-result-selector' style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
                 <div style="background-color: ${COLORS[person.fullName[0]]};" class="img-container">
                     <p  style='text-transform: capitalize'>${person.fullName[0]}</p>
                 </div>
@@ -81,12 +81,12 @@ searchInput.on('keyup', async (e) =>{
             </div>
         `)
    })
-   $('.results-item').on('click', (e) =>{
-        currentChat.room = $(e.target).parent().attr('id');
-        currentChat.fullName = $(e.target).parent().children('.person-fullName').text();
-        resultItemHandler();
+//    $('.results-item').on('click', (e) =>{
+//         currentChat.room = $(e.target).parent().attr('id');
+//         currentChat.fullName = $(e.target).parent().children('.person-fullName').text();
+//         resultItemHandler();
         
-    })
+//     })
    
 })
 const displayRecentMessages = async () =>{
@@ -98,7 +98,7 @@ const displayRecentMessages = async () =>{
     recents.map((data) =>{
         recentMessagesList.append(`
             <div id="${data.personId}" class="recent-message-item" style='position: relative'>
-                <span style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
+                <span  class='recent-messages-selector' style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
                 <div style="background-color: ${COLORS[data.personFullName[0]]};" class="recent-item-img-container">
                     <p  style='text-transform: capitalize'>${data.personFullName[0]}</p>
                 </div>
@@ -109,11 +109,11 @@ const displayRecentMessages = async () =>{
             </div>
         `)
     })
-    $('.recent-message-item').on('click', (e) =>{
-        currentChat.room = $(e.target).parent().attr('id');
-        currentChat.fullName = $(e.target).parent().children('.recent-item-txt').children('.person-fullName').text();
-        resultItemHandler();
-    })
+    // $('.recent-message-item').on('click', (e) =>{
+    //     currentChat.room = $(e.target).parent().attr('id');
+    //     currentChat.fullName = $(e.target).parent().children('.recent-item-txt').children('.person-fullName').text();
+    //     resultItemHandler();
+    // })
 }
 const addToRecentMessages = async (userId, personId, personFullName, opened, lastMessage) =>{
     const recentMessages = await axios.post('recent-message', {
@@ -143,7 +143,7 @@ const addToRecentMessages = async (userId, personId, personFullName, opened, las
     })
     recentMessagesList.append(`
             <div id="${personId}" class="recent-message-item" style='position: relative'>
-                <span style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
+                <span class='recent-messages-selector' style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
                 <div style="background-color: ${COLORS[personFullName[0]]};" class="recent-item-img-container">
                     <p style='text-transform: capitalize'>${personFullName[0]}</p>
                 </div>
@@ -212,11 +212,16 @@ socket.on('receive', async (data) =>{
             </div>
         </div>
     `)
-    $('.recent-message-item').on('click', (e) =>{
-        currentChat.room = $(e.target).parent().attr('id');
-        currentChat.fullName = $(e.target).parent().children('.recent-item-txt').children('.person-fullName').text();
-        resultItemHandler();
-    })
 })
 
 displayRecentMessages();
+$(document).on('click', '.recent-messages-selector', (e) =>{
+        currentChat.room = $(e.target).parent().attr('id');
+        currentChat.fullName = $(e.target).parent().children('.recent-item-txt').children('.person-fullName').text();
+        resultItemHandler();
+})
+$(document).on('click', '.search-result-selector', (e) =>{
+        currentChat.room = $(e.target).parent().attr('id');
+        currentChat.fullName = $(e.target).parent().children('.person-fullName').text();
+        resultItemHandler();
+})
