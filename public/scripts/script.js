@@ -201,12 +201,13 @@ socket.on('receive', async (data) =>{
     chatsContainer.animate({scrollTop: chatsContainer[0].scrollHeight})
     recentMessagesList.children(`#${data.userId}`).remove();
     recentMessagesList.prepend(`
-        <div id="${data.userId}" class="recent-message-item">
+        <div id="${data.userId}" class="recent-message-item" style='position: relative'>
+            <span style='position: absolute; width: 100%; height: 100%; background-color: transparent; top: 0; left: 0'></span>
             <div style="background-color: ${COLORS[data.fullName[0]]};" class="recent-item-img-container">
                 <p style='text-transform: capitalize'>${data.fullName[0]}</p>
             </div>
             <div class="recent-item-txt">
-                <p style='text-transform: capitalize'>${data.fullName}</p>
+                <p class='person-fullName' style='text-transform: capitalize'>${data.fullName}</p>
                 <p class=${'chat-unopened'}>${data.message}</p>
             </div>
         </div>
