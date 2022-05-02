@@ -38,6 +38,12 @@ body, html, * {
   row-gap: 20px;
 }
 
+@media screen and (max-width: 400px) {
+  .main-container form {
+    width: 300px;
+  }
+}
+
 .main-container form p {
   font-size: 24px;
   font-weight: 600;
